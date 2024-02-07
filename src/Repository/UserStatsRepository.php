@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\StatsUsers;
+use App\Entity\UserStats;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<StatsUsers>
+ * @extends ServiceEntityRepository<UserStats>
  *
- * @method StatsUsers|null find($id, $lockMode = null, $lockVersion = null)
- * @method StatsUsers|null findOneBy(array $criteria, array $orderBy = null)
- * @method StatsUsers[]    findAll()
- * @method StatsUsers[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method UserStats|null find($id, $lockMode = null, $lockVersion = null)
+ * @method UserStats|null findOneBy(array $criteria, array $orderBy = null)
+ * @method UserStats[]    findAll()
+ * @method UserStats[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StatsUsersRepository extends ServiceEntityRepository
+class UserStatsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, StatsUsers::class);
+        parent::__construct($registry, UserStats::class);
     }
 
 //    /**
-//     * @return StatsUsers[] Returns an array of StatsUsers objects
+//     * @return UserStats[] Returns an array of UserStats objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class StatsUsersRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?StatsUsers
+//    public function findOneBySomeField($value): ?UserStats
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

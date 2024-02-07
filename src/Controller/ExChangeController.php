@@ -6,14 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/user', name: 'app_user')]
-class UserController extends AbstractController
+class ExChangeController extends AbstractController
 {
-    #[Route('', name: 'app_user_index')]
+    #[Route('/ex/change', name: 'app_ex_change')]
     public function index(): Response
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        return $this->render('ex_change/index.html.twig', [
+            'controller_name' => 'ExChangeController',
         ]);
     }
 }
