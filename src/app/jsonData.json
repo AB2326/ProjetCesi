@@ -1,0 +1,102 @@
+{
+    "CESI": {
+        "ROLES": [
+        {
+            "ID": "1",
+            "name": "user"
+        },
+        {
+            "ID": "2",
+            "name": "moderateur"
+        },
+        {
+            "ID": "3",
+            "name": "Administrateur"
+        }
+        ],
+
+        "USERS": [
+            {
+            "ID": "1",
+            "firstName": "admin",
+            "lastName": "ad",
+            "userName": "admin",
+            "email": "",
+            "phone": "",
+            "password": "admin",
+            "verified": "true",
+            "isConnected": "false",
+            "isActivated": "true",
+            "zipCode": "13000",
+            "address": "CESI",
+            "region": "PACA",
+            "country": "France",
+            "id_roles": "3"
+        }
+        ],
+
+        "STATS": {
+            "ID": "",
+            "upvote": "",
+            "download": "",
+            "views": "",
+            "ratio": "",
+            "shares": "",
+            "id_Resources": ""
+        },
+        "RESOURCES": {
+            "ID": "",
+            "title": "",
+            "comment": "",
+            "link": "",
+            "status": "",
+            "type": "",
+            "CreatedAt": "",
+            "updateAt": "",
+            "deletedAt": "",
+            "isDeleted": "",
+            "isCompleted": "",
+            "isRestricted": "",
+            "id_Stats": ""
+        },
+
+        "CATEGORIES": [
+            {
+                "ID": "1",
+                "name": "Communication"
+            },
+            {
+                "ID": "2",
+                "name": "Culture"
+            },
+            {
+                "ID": "3",
+                "name": "Développement personnel"
+            }
+        ],
+        "STATS_USERS": {
+            "ID": "",
+            "keywords": "",
+            "connexions": "",
+            "connectedTime": "",
+            "searchByRegion": "",
+            "searchByCountry": "",
+            "id_Users": ""
+        },
+        "EXCHANGE": {
+            "ID": "",
+            "comment": "",
+            "sendAt": "",
+            "status": "",
+            "isDeleted": "",
+            "id_Users": ""
+        },
+        "COMMENT": {
+            "ID": "",
+            "content": "",
+            "status": "",
+            "isDeleted": "",
+            "id_Ressources": ""
+        }
+    }
+}
