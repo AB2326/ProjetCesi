@@ -15,13 +15,6 @@ class ResourcesController extends AbstractController
     {
         $this->resourcesRepository = $resourcesRepository;
     }
-
-    public function index(): Response
-    {
-        return $this->render('resources/index.html.twig', [
-            'controller_name' => 'ResourcesController',
-        ]);
-    }
     #[Route('/')]
     public function allResources(){
         $resources = $this->resourcesRepository->findAll();
