@@ -4,8 +4,6 @@ namespace App\Controller;
 
 use App\Repository\ResourcesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 #[Route('/resources', name: 'app_resources')]
 class ResourcesController extends AbstractController

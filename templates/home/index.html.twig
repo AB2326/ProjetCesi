@@ -9,25 +9,8 @@
              </text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf
             </text>
         </svg>">
-    <header>
-        <nav class="navbar">
-            <div class="navbar-logo">
-                <a href="https://picsum.photos/200/300">Logo</a>
-            </div>
-            <div class="navbar-search">
-                <form>
-                    <input type="text" placeholder="Rechercher">
-                </form>
-            </div>
-            <div class="navbar-buttons">
-                <button class="connexion-button">Connexion</button>
-                <a href="https://picsum.photos/50/50" target="_blank" class="inscription-button">Inscription</a>
-                <div class="accessibility-button">
-                    <a href="https://picsum.photos/50/50"><img alt="Accessibility"></a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    {% include 'header/header.html.twig' %}
+    {% include 'sidebar/sidebar.html.twig' %}
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -35,6 +18,7 @@
 </head>
 <body>
     {% block body %}
+{#    {%  include 'resources/index.html.twig' %}#}
 
     {% endblock %}
 </body>
