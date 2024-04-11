@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 400px; /* Adjusted margin */
+    margin-left: 200px; /* Adjusted margin */
+
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.article-container {
+    display: flex;
+}
+
+.article {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 50px;
+}
+
+.buttons {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.menu {
+    position: fixed;
+    top: 20px;
+}
+
+.favorite-button {
+    padding: 10px 20px;
+}
