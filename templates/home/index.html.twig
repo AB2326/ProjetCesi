@@ -18,8 +18,11 @@
 </head>
 <body>
     {% block body %}
-    {%  include 'resources/index.html.twig' %}
+        {%  include 'resources/index.html.twig' %}
 
     {% endblock %}
 </body>
+<footer>
+    {% include 'footer/footer.html.twig' %}
+</footer>
 </html>

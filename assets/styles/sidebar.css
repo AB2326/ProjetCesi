@@ -1,18 +1,12 @@
 .sidebar {
-    height: 100%;
-    width: 150px;
-    position: fixed;
-    background-color: #f4f4f4;
-    border-right: 1px solid #ccc;
-    transition: transform 0.3s ease; /* Change transition property */
-    z-index: 1000;
-    padding-top: 60px; /* Décalage pour la barre de navigation */
-    transform: translateX(0); /* Initial state, sidebar visible */
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding-top: 60px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow */
 }
 
 .menu {
-    color: #333;
-    margin-top: 200px; /* Décalage pour le contenu du menu */
+    color: #000000; /* Changed text color */
 }
 
 .menu ul {
@@ -21,30 +15,16 @@
 }
 
 .menu ul li {
-    padding: 10px;
+    padding: 12px 20px; /* Adjusted padding */
+    cursor: pointer; /* Added cursor */
+    transition: background-color 0.3s ease; /* Added transition */
+}
+
+.menu ul li:hover {
+    background-color: #f0f2f5; /* Added hover background color */
 }
 
 .menu ul li a {
     text-decoration: none;
-    color: #333;
-}
-
-.content {
-    padding: 20px;
-}
-
-.toggle-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    color: #333;
-    z-index: 1000;
-}
-
-.sidebar-hidden {
-    transform: translateX(-100%);
+    color: #000000;
 }

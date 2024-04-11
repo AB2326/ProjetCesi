@@ -1,0 +1,10 @@
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    position: fixed;
+    bottom: -100px; /* Initially hidden */
+    width: 100%;
+    transition: bottom 0.3s ease; /* Smooth transition effect */
+}
+.footer.show {
+}

@@ -1,29 +1,12 @@
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 400px; /* Adjusted margin */
-    margin-left: 200px; /* Adjusted margin */
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.article-container {
-    display: flex;
-}
 
 .article {
-    width: 30%;
+    width: 100%; /* Adjusted width to take full width of the column */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 50px;
+    margin-bottom: 20px; /* Added margin-bottom */
+    margin-left: 300px;
 }
 
 .buttons {
@@ -31,17 +14,12 @@
     text-align: right;
 }
 
-.menu {
-    position: fixed;
-    top: 20px;
-}
-
 .like-button,
 .dislike-button,
-.favorite-button {
+.favorite-button,
+.view-more-button {
     padding: 5px 10px; /* Reduce the padding for smaller buttons */
     cursor: pointer; /* Change cursor to pointer for clickable buttons */
-    color: #fff; /* Set text color to white */
     border: none; /* Remove border */
     border-radius: 5px; /* Add border-radius for rounded corners */
 }
@@ -58,8 +36,13 @@
     background-color: yellow; /* Set background color for favorite button */
 }
 
+.view-more-button {
+    background-color: green; /* Set background color for view more button */
+}
+
 .like-button:hover,
 .dislike-button:hover,
-.favorite-button:hover {
+.favorite-button:hover,
+.view-more-button:hover {
     opacity: 0.8; /* Reduce opacity on hover for visual feedback */
 }
