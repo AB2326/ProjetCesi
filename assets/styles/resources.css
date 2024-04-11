@@ -4,7 +4,6 @@
     justify-content: center;
     margin-top: 400px; /* Adjusted margin */
     margin-left: 200px; /* Adjusted margin */
-
 }
 
 .row {
@@ -37,6 +36,30 @@
     top: 20px;
 }
 
+.like-button,
+.dislike-button,
 .favorite-button {
-    padding: 10px 20px;
+    padding: 5px 10px; /* Reduce the padding for smaller buttons */
+    cursor: pointer; /* Change cursor to pointer for clickable buttons */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add border-radius for rounded corners */
+}
+
+.like-button {
+    background-color: blue; /* Set background color for like button */
+}
+
+.dislike-button {
+    background-color: red; /* Set background color for dislike button */
+}
+
+.favorite-button {
+    background-color: yellow; /* Set background color for favorite button */
+}
+
+.like-button:hover,
+.dislike-button:hover,
+.favorite-button:hover {
+    opacity: 0.8; /* Reduce opacity on hover for visual feedback */
 }
