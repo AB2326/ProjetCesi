@@ -20,9 +20,6 @@ class User
     #[ORM\Column(length: 50)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $username = null;
-
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -87,18 +84,6 @@ class User
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
 
         return $this;
     }

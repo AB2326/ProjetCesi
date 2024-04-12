@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
-	<h1>Connexion</h1>
+    <h1>Login</h1>
 
+    {% if error %}
+        <div>{{ error }}</div>
+    {% endif %}
 
-	{{ form_start(form) }}
-	<button type="submit">Valider</button>
-	{{ form_end(form) }}
-
-
+        {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.firstPassword) }}
+        <button type="submit">Login</button>
+        {{ form_end(form) }}
 {% endblock %}
