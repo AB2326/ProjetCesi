@@ -11,16 +11,18 @@
 <body>
 <div class="container">
     <div class="menu">
-        <button class="btn btn-primary"><i class="fas fa-upload"></i> Publier</button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-upload"></i> Publier</button>
         <button class="btn btn-primary"><i class="fas fa-image"></i></button>
         <button class="btn btn-primary"><i class="fas fa-link"></i></button>
     </div>
+    <!-- Loop through resources and render dynamically -->
     {% for resource in resources %}
         <div class="row">
-            <div class="col-md-6"> <!-- Use Bootstrap grid system class for column -->
+            <div class="col-md-6">
                 <div class="article">
                     <h2>{{ resource.title }}</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae dui nec urna congue tempus.</p>
+                    <p>{{ resource.content }}</p>
+                    <!-- Buttons -->
                     <div class="buttons">
                         <button class="like-button btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
                         <button class="dislike-button btn btn-danger"><i class="fas fa-thumbs-down"></i></button>
@@ -34,5 +36,10 @@
         </div>
     {% endfor %}
 </div>
+
+<!-- Modal -->
+{% include 'modal/publish.html.twig' %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
