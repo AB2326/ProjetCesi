@@ -76,9 +76,6 @@ class LoginController extends AbstractController
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email']]);
             if ($user && $user->getPassword() === $formData['firstPassword']) {
-
-                $this->get('session')->set('user', $user);
-
                 return $this->redirectToRoute('app_home');
             } else {
                 $error = 'Email ou mot de passe invalide.';
