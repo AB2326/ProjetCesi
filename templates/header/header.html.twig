@@ -1,9 +1,11 @@
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Info Gouv!{% endblock %}</title>
-    <!-- Add Bootstrap CSS CDN link -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/styles/header.css"> <!-- Lien vers le CSS spécifique pour le header -->
+    <link rel="stylesheet" href="../../assets/styles/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,
         <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22>
             <text y=%221.2em%22 font-size=%2296%22>⚫️
@@ -11,21 +13,29 @@
             </text>
         </svg>">
 </head>
+<body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> <!-- Replace with Bootstrap classes -->
+    <div class="container-fluid navbar">
+        <a class="navbar-brand" href="#">
+            <span class="navbar-brand-text">INFO GOUV</span>
+        </a>
+        <div class="accessibility-button">
+            <span>Accessibilité</span>
+            <a href=""><i class="fas fa-lightbulb"></i></a>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0055a4;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a> <!-- Replace with Bootstrap classes -->
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button> <!-- Replace with Bootstrap classes -->
+                <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             <div class="d-flex">
-                <button class="btn btn-outline-light me-2" type="button">Connexion</button> <!-- Replace with Bootstrap classes -->
-                <a href="https://picsum.photos/50/50" target="_blank" class="btn btn-outline-light me-2">Inscription</a> <!-- Replace with Bootstrap classes -->
-                <div class="accessibility-button">
-                    <a href="https://picsum.photos/50/50"><img alt="Accessibility"></a>
-                </div>
+                <button class="btn btn-outline-light me-2" type="button">Connexion</button>
+                <a href="" target="_blank" class="btn btn-outline-light me-2">Inscription</a>
             </div>
         </div>
     </nav>
 </header>
+</body>
+</html>
