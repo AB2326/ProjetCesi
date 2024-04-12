@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ResourcesType;
 use App\Repository\ResourcesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +15,12 @@ class HomeController extends AbstractController
     {
         $this->resourcesRepository = $resourcesRepository;
     }
-    #[Route('/')]
+    #[Route('/', name: 'app_home')]
     public function index(){
         $resources = $this->resourcesRepository->findAll();
         return $this->render('home/index.html.twig', [
             'resources' => $resources
+
         ]);
     }
-
 }
