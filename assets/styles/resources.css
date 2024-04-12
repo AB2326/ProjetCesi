@@ -1,11 +1,10 @@
-
 .article {
-    width: 100%; /* Adjusted width to take full width of the column */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Added margin-bottom */
+    margin-bottom: 20px;
     margin-left: 300px;
 }
 
@@ -18,31 +17,39 @@
 .dislike-button,
 .favorite-button,
 .view-more-button {
-    padding: 5px 10px; /* Reduce the padding for smaller buttons */
-    cursor: pointer; /* Change cursor to pointer for clickable buttons */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
 }
 
 .like-button {
-    background-color: blue; /* Set background color for like button */
+    background-color: blue;
 }
 
 .dislike-button {
-    background-color: red; /* Set background color for dislike button */
+    background-color: red;
 }
 
 .favorite-button {
-    background-color: yellow; /* Set background color for favorite button */
+    background-color: yellow;
 }
 
 .view-more-button {
-    background-color: green; /* Set background color for view more button */
+    background-color: green;
 }
 
 .like-button:hover,
 .dislike-button:hover,
 .favorite-button:hover,
 .view-more-button:hover {
-    opacity: 0.8; /* Reduce opacity on hover for visual feedback */
+    opacity: 0.8;
+}
+
+.menu button {
+    margin-right: 5px;
+}
+.container .menu {
+    margin-left: 200px;
+    margin-bottom: 20px;
 }
