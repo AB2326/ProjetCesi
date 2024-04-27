@@ -95,8 +95,6 @@ class Resources
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
-        $this->deletedAt = new DateTime();
     }
 
     /* Getters Setters */
