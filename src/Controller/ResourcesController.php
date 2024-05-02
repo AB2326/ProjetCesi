@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/resources', name: 'app_resources')]
 class ResourcesController extends AbstractController
 {
     private ResourcesRepository $resourcesRepository;
@@ -20,7 +19,7 @@ class ResourcesController extends AbstractController
         $this->resourcesRepository = $resourcesRepository;
     }
 
-    #[Route('/')]
+    #[Route('/resources/', name: 'app_resources')]
     public function allResources(): Response
     {
         $resources = $this->resourcesRepository->findAll();
