@@ -19,42 +19,51 @@ class ResourcesController extends AbstractController
         $this->resourcesRepository = $resourcesRepository;
     }
 
-    #[Route('/resources/', name: 'app_resources')]
+    #[Route('/resources', name: 'app_resources')]
     public function allResources(): Response
     {
         $resources = $this->resourcesRepository->findAll();
         return $this->render('resources/index.html.twig', [
-            'resources' => $resources
+            'resources' => $resources,
         ]);
     }
 
-    #[Route('/{id}', name: 'resource_page')]
+    #[Route('/resources/{id}', name: 'resource_page')]
     public function showResource(int $id): Response
     {
-        $resource = $this->resourcesRepository->findOneBy(['id' => $id]);
+        $resource = $this->resourcesRepository->find($id);
+        if (!$resource) {
+            throw $this->createNotFoundException("Resource not found.");
+        }
         return $this->render('article/article.html.twig', [
-            'resource' => $resource
+            'resource' => $resource,
         ]);
     }
 
-    #[Route('/createArticle', name: 'create_article')]
+    #[Route('/resources/create', name: 'create_article')]
     public function createArticle(Request $request): Response
     {
-        $article = new Resources();
-        $form = $this->createForm(ResourcesType::class, $article);
+        $resource = new Resources();
+        $form = $this->createForm(ResourcesType::class, $resource);
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->estValide()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($article);
+            $entityManager->persist($resource);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_resources');
+            return $this->redirectToRoute('article_success');
         }
 
         return $this->render('modal/publish.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-}
 
+    #[Route('/resources/success', name: 'article_success')]
+    public function success(): Response
+    {
+        return new Response("Article créé avec succès!");
+    }
+}

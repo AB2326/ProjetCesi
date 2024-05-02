@@ -11,4 +11,3 @@ import './styles/sidebar.css';
 import './styles/resources.css';
 import './styles/footer.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
