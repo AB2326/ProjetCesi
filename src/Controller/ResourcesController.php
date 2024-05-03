@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Resources;
+use App\Form\ArticleType;
 use App\Form\ResourcesType;
 use App\Repository\ResourcesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,17 +20,18 @@ class ResourcesController extends AbstractController
         $this->resourcesRepository = $resourcesRepository;
     }
 
-    #[Route('/resources/', name: 'app_resources')]
-    public function allResources(): Response
+    #[Route('/', name: 'app_resources')]
+    public function index(): Response
     {
         $resources = $this->resourcesRepository->findAll();
+
         return $this->render('resources/index.html.twig', [
             'resources' => $resources
         ]);
     }
 
-    #[Route('/{id}', name: 'resource_page')]
-    public function showResource(int $id): Response
+    #[Route('/resources/{id}', name: 'resource_page')]
+    public function getResourceById(int $id): Response
     {
         $resource = $this->resourcesRepository->findOneBy(['id' => $id]);
         return $this->render('article/article.html.twig', [
@@ -37,23 +39,23 @@ class ResourcesController extends AbstractController
         ]);
     }
 
-    #[Route('/createArticle', name: 'create_article')]
-    public function createArticle(Request $request): Response
+    #[Route('/createResource', name: 'create_resource')]
+    public function createResource(Request $request): Response
     {
-        $article = new Resources();
-        $form = $this->createForm(ResourcesType::class, $article);
+        $resources = new Resources();
+        $form = $this->createForm(ResourcesType::class, $resources);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($article);
+            $entityManager->persist($resources);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_resources');
         }
 
         return $this->render('modal/publish.html.twig', [
             'form' => $form->createView(),
+            'resources' => $resources
         ]);
     }
 }

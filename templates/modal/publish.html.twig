@@ -1,44 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="modal.css">
-</head>
-<body>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Publier un Article</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-{#            <div class="modal-body">#}
-{#                {{ form_start(form) }}#}
-{#                <div class="mb-3">#}
-{#                    {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'form-label'}}) }}#}
-{#                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}#}
-{#                </div>#}
-{#                <div class="mb-3">#}
-{#                    {{ form_label(form.content, 'Contenu de l\'article', {'label_attr': {'class': 'form-label'}}) }}#}
-{#                    {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 8}}) }}#}
-{#                </div>#}
-{#                <button type="submit" class="btn btn-primary">Publier</button>#}
-{#                {{ form_end(form) }}#}
-{#            </div>#}
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-            </div>
-        </div>
-    </div>
+{% block body %}
+<div class="modal-body">
+    <button type="submit" class="btn btn-primary">Publier</button>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
+{{ form(form) }}
+{% endblock %}
