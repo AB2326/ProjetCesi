@@ -1,6 +1,30 @@
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Info Gouv!{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% include 'header/header.html.twig' %}
+</head>
+<body>
+<div class="container-fluid" style="display: flex; flex-direction: column">
+    <div class="row">
+        <div class="col-6">
+            {% include 'sidebar/sidebar.html.twig' %}
+        </div>
+        <div class="col-7 justify-content-center align-items-center" style="min-height: 100vh; padding: 50px; margin-left:200px">
+            <div style="margin-top:0">
+                {% block body %}
+                    {{ form(form) }}
+                    <button type="submit" class="btn btn-primary">Publier</button>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
 
-    {{ form(form) }}
-
-    <button type="submit" class="btn btn-primary">Publier</button>
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
 {% endblock %}
+</body>
+</html>
