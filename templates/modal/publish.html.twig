@@ -1,30 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Info Gouv!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     {% include 'header/header.html.twig' %}
 </head>
 <body>
-<div class="container-fluid" style="display: flex; flex-direction: column">
-    <div class="row">
-        <div class="col-6">
-            {% include 'sidebar/sidebar.html.twig' %}
-        </div>
-        <div class="col-7 justify-content-center align-items-center" style="min-height: 100vh; padding: 50px; margin-left:200px">
-            <div style="margin-top:0">
-                {% block body %}
-                    {{ form(form) }}
-                    <button type="submit" class="btn btn-primary">Publier</button>
-                {% endblock %}
-            </div>
-        </div>
+<div class="container-fluid" style="display: flex; flex-direction: column; margin-top:50px ;margin-left: 200px;">
+    {{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.title, {'attr': {
+            'class': 'form-control'
+            , 'style': 'width:800px'
+        }}) }}
     </div>
+    <div class="mb-3">
+        {{ form_label(form.content, 'Contenu de l\'article', {'label_attr': {'class': 'form-label'}}) }}
+
+        <div class="editor-toolbar"
+             style="border: 1px solid #ccc; border-bottom: 0; max-width: 800px; padding: 5px; background: #f9f9f9;">
+            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>
+        </div>
+
+        {{ form_widget(form.content, {
+            'attr': {
+                'class': 'form-control',
+                'rows': 10,
+                'style': 'border-radius: 0; height: 200px; width: 800px; border-top: 0; overflow-y: auto; text-align: left; vertical-align: top;',
+            }
+        }) }}
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Publier</button>
+    {{ form_end(form) }}
+</div>
 </div>
 
 {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
 {% endblock %}
 </body>
-</html>
