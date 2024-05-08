@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-// use Doctrine\ORM\Utility\ClassUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,11 +15,6 @@ use Symfony\Component\Form\FormError;
 // use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 // use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-
-
-
-
 
 class LoginController extends AbstractController
 {

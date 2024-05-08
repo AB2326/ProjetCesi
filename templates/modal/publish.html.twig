@@ -7,14 +7,16 @@
     {% include 'header/header.html.twig' %}
 </head>
 <body>
-<div class="container-fluid" style="display: flex; flex-direction: column; margin-top:50px ;margin-left: 200px;">
+<div class="container-fluid" style="display: flex; flex-direction: column; margin-top: 50px; margin-left: 200px;">
     {{ form_start(form) }}
     <div class="mb-3">
         {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(form.title, {'attr': {
-            'class': 'form-control'
-            , 'style': 'width:800px'
-        }}) }}
+        {{ form_widget(form.title, {
+            'attr': {
+                'class': 'form-control',
+                'style': 'width: 800px; text-align: left; vertical-align: top;',
+            }
+        }) }}
     </div>
     <div class="mb-3">
         {{ form_label(form.content, 'Contenu de l\'article', {'label_attr': {'class': 'form-label'}}) }}
@@ -32,15 +34,12 @@
             'attr': {
                 'class': 'form-control',
                 'rows': 10,
-                'style': 'border-radius: 0; height: 200px; width: 800px; border-top: 0; overflow-y: auto; text-align: left; vertical-align: top;',
+                'style': 'border-radius: 0; height: 200px; width: 800px; text-align: left; vertical-align: top; overflow-y: auto;',
             }
         }) }}
     </div>
-
-
     <button type="submit" class="btn btn-primary">Publier</button>
     {{ form_end(form) }}
-</div>
 </div>
 
 {% block javascripts %}
