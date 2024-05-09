@@ -1,17 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Réinitialisation de certains styles par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #f5f5f5;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #logo img {
+            height: 100px; /* Ajustez la taille selon vos besoins */
+        }
+
+        /* Mise en page principale */
+        main {
+            display: flex;
+            flex: 1;
+        }
+
+        .contenu {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .contenu form {
+            max-width: 400px; /* Ajustez la largeur si nécessaire */
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .contenu h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contenu button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contenu button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
-
-    {% if error %}
-        <div>{{ error }}</div>
-    {% endif %}
-
-        {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.firstPassword) }}
-        <button type="submit">Login</button>
-        {{ form_end(form) }}
+    <main>
+        <div class="contenu">
+            <h1>Connexion</h1>
+            {{ form_start(form) }}
+            {{ form_row(form.email, { 'label': 'Adresse email' }) }}
+            {{ form_row(form.firstPassword, { 'label': 'Mot de passe' }) }}
+            <button type="submit">Connexion</button>
+            {{ form_end(form) }}
+        </div>
+    </main>
 {% endblock %}

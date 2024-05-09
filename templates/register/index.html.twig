@@ -1,31 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        /* Réinitialisation de certains styles par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            background-color: #f7f7f7;
+        }
+
+        /* Mise en page principale */
+        main {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* Ajustez la largeur si nécessaire */
+            background-color: #fff;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #0056b3;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="mt-5">Register</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                {{ form_start(form) }}
-                <div class="form-group">
-                    {{ form_widget(form.firstname) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.lastname) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.firstPassword) }}
-                </div>
-                <div class="form-group">
-                    {{ form_widget(form.secondPassword) }}
-                </div>
-                <button type="submit" class="btn btn-primary">S'inscrire</button>
-                {{ form_end(form) }}
+    <main>
+        <div class="container">
+            <h1>Inscription</h1>
+            {{ form_start(form) }}
+            <div class="form-group">
+                <label for="firstname">Prénom</label>
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="form-group">
+                <label for="lastname">Nom</label>
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="form-group">
+                <label for="firstPassword">Mot de passe</label>
+                {{ form_widget(form.firstPassword) }}
+            </div>
+            <div class="form-group">
+                <label for="secondPassword">Confirmer le mot de passe</label>
+                {{ form_widget(form.secondPassword) }}
+            </div>
+            <button type="submit">S'inscrire</button>
+            {{ form_end(form) }}
+
+            <div class="form-footer">
+                <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous ici</a></p>
             </div>
         </div>
-    </div>
+    </main>
 {% endblock %}

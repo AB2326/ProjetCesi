@@ -24,7 +24,7 @@ class ResourcesController extends AbstractController
         $this->resourcesRepository = $resourcesRepository;
     }
 
-    #[Route('/', name: 'app_resources')]
+    #[Route('/resources', name: 'app_resources')]
     public function index(): Response
     {
         $resources = $this->resourcesRepository->findAll();

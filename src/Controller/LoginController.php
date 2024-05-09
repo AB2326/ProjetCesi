@@ -24,7 +24,7 @@ class LoginController extends AbstractController
         $form = $this->createForm(RegisterType::class);
         $form->handleRequest($request);
 
-        $date = New DateTime;
+        $date = new DateTime;
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userData = $form->getData();
@@ -69,17 +69,17 @@ class LoginController extends AbstractController
             $formData = $form->getData();
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email']]);
-            if ($user && $user->getPassword() === $formData['firstPassword']) {
-                return $this->redirectToRoute('app_home');
-            } else {
-                $error = 'Email ou mot de passe invalide.';
-            }
+
+            return $this->redirectToRoute('app_home');
+
+            // if ($user->getPassword() === $formData['firstPassword']) {
+            // } 
         }
+
 
         return $this->render('login/index.html.twig', [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error' => $error,
         ]);
     }
 }
