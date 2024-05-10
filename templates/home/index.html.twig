@@ -5,7 +5,6 @@
     <title>{% block title %}Info Gouv!{% endblock %}</title>
     {% include 'header/header.html.twig' %}
     {% include 'sidebar/sidebar.html.twig' %}
-
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
@@ -15,7 +14,4 @@
         {%  include 'resources/index.html.twig' %}
     {% endblock %}
 </body>
-<footer>
-    {% include 'footer/footer.html.twig' %}
-</footer>
 </html>

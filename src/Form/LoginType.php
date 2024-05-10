@@ -15,9 +15,15 @@ class LoginType extends AbstractType
         $builder
             ->add('email', TextType::class, [
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'E-mail'
+                ]
             ])
             ->add('firstPassword', PasswordType::class, [ 
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Password'
+                ]
             ]);
     }
 

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Resources;
 use App\Form\ResourcesType;
-use Doctrine\ORM\Utility\ClassUtils;
+use Doctrine\Common\Util\ClassUtils;
 
 use App\Repository\ResourcesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
+
 
 class ResourcesController extends AbstractController
 {
@@ -46,13 +48,16 @@ class ResourcesController extends AbstractController
     #[Route('/createResource', name: 'create_resource')]
     public function createResource(Request $request): Response
     {
-        $resources = new Resources();
+        $resource = new Resources();
 
-        $form = $this->createForm(ResourcesType::class, $resources);
+        $form = $this->createForm(ResourcesType::class, $resource);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($resources);
+
+            $resource->setCreatedAt(new DateTime());
+
+            $this->entityManager->persist($resource);
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_resources');

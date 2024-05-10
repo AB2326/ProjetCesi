@@ -15,9 +15,15 @@ class ResourcesType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Titre'
+                ]
             ])
             ->add('content', TextType::class, [
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Contenu de l\'article'
+                ]
             ])
         ;
     }

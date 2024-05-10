@@ -1,23 +1,25 @@
-<header>
-    <div class="container-fluid navbar">
-        <a class="navbar-brand" href="/">
-            <span class="navbar-brand-text">INFO GOUV</span>
-        </a>
-        <div class="accessibility-button">
-            <span>Accessibilité</span>
-            <a href=""><i class="fas fa-lightbulb"></i></a>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0055a4;">
-        <div class="container-fluid">
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
-            <div class="d-flex">
-                <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
-                <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
+<head>
+    <header>
+        <div class="container-fluid navbar">
+            <a class="navbar-brand" href="/">
+                <span class="navbar-brand-text">INFO GOUV</span>
+            </a>
+            <div class="accessibility-button">
+                <span>Accessibilité</span>
+                <a href=""><i class="fas fa-lightbulb"></i></a>
             </div>
         </div>
-    </nav>
-</header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0055a4;">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                <div class="d-flex">
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+</head>
