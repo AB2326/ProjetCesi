@@ -86,4 +86,5 @@ class ResourcesController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
 
+
 }
