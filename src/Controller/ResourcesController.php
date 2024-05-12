@@ -56,6 +56,8 @@ class ResourcesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $resource->setCreatedAt(new DateTime());
+            $resource->setIsCompleted(false);
+            $resource->setIsRestricted(false);
 
             $this->entityManager->persist($resource);
             $this->entityManager->flush();
