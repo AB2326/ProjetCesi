@@ -6,8 +6,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     margin-left: 300px;
-}
 
+}
+.entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .buttons {
     margin-top: 10px;
     text-align: right;

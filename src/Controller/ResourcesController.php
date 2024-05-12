@@ -62,11 +62,28 @@ class ResourcesController extends AbstractController
             $this->entityManager->persist($resource);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_resources');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('modal/publish.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/deleteResource/{id}', name: 'app_deleteResource', methods: ['GET', 'PATCH'])]
+    public function deleteResource(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $resource = $this->resourcesRepository->find($id);
+
+        if (!$resource) {
+            throw $this->createNotFoundException('Resource not found');
+        }
+
+        $resource->setDeletedAt(new \DateTime())
+            ->setIsDeleted(1);
+        $entityManager->persist($resource);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home');
+    }
+
 }
