@@ -12,9 +12,9 @@ use App\Entity\User;
 use App\Form\LoginType;
 use DateTime;
 use Symfony\Component\Form\FormError;
-// use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-// use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorInterface;
 
 class LoginController extends AbstractController
 {
@@ -56,31 +56,40 @@ class LoginController extends AbstractController
     }
 
     #[Route('/login', name: 'app_login')]
-    public function login(Request $request, AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         $form = $this->createForm(LoginType::class);
-
+    
         $form->handleRequest($request);
-
+    
         $error = $authenticationUtils->getLastAuthenticationError();
-
+    
         $lastUsername = $authenticationUtils->getLastUsername();
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer l'e-mail et le mot de passe soumis dans le formulaire
             $formData = $form->getData();
-
+    
+            // Chercher l'utilisateur par son e-mail dans la base de données
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email']]);
-
-            return $this->redirectToRoute('app_home');
-
-            // if ($user->getPassword() === $formData['firstPassword']) {
-            // } 
+    
+            // Vérifier si l'utilisateur existe et si le mot de passe est correct
+            if ($user && password_verify($formData['password'], $user->getPassword())) {
+                // Authentifier l'utilisateur
+                $guardHandler->authenticateUser($user, $authenticator, $request);
+    
+                // Rediriger l'utilisateur vers la page souhaitée après la connexion
+                return $this->redirectToRoute('app_home');
+            } else {
+                // Afficher une erreur de connexion invalide
+                $this->addFlash('error', 'Identifiants invalides');
+            }
         }
-
-
+    
         return $this->render('login/index.html.twig', [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
         ]);
     }
+    
 }
