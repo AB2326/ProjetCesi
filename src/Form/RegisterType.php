@@ -31,6 +31,12 @@ class RegisterType extends AbstractType
                     'placeholder' => 'Email'
                 ]
             ])
+            ->add('phone', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Téléphone portable'
+                ]
+            ])
             ->add('firstPassword', PasswordType::class, [ 
                 'required' => true,
                 'attr' => [

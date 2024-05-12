@@ -33,6 +33,7 @@ class LoginController extends AbstractController
             $user->setFirstname($userData['firstname']);
             $user->setLastname($userData['lastname']);
             $user->setEmail($userData['email']);
+            $user->setPhone($userData['phone']);
             $user->setCreatedAt($date);
 
             $hashedPassword = password_hash($userData['firstPassword'], PASSWORD_DEFAULT);
