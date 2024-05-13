@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -21,6 +22,29 @@ class Comment
 
     #[ORM\Column]
     private ?bool $isDeleted = null;
+
+    /**
+     * @var DateTimeInterface|DateTime|null
+     */
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private DateTimeInterface|DateTime|null $createdAt = null;
+
+    /**
+     * @return DateTime|DateTimeInterface|null
+     */
+    public function getCreatedAt(): DateTimeInterface|DateTime|null
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime|DateTimeInterface|null $createdAt
+     */
+    public function setCreatedAt(DateTimeInterface|DateTime|null $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
 
     public function getId(): ?int
     {
@@ -69,4 +93,5 @@ class Comment
 
         return $this;
     }
+
 }

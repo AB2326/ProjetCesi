@@ -36,7 +36,7 @@ class ResourcesController extends AbstractController
         ]);
     }
 
-    #[Route('/resources/{id}', name: 'resource_page')]
+    #[Route('/resource/{id}', name: 'resource_page')]
     public function getResourceById(int $id): Response
     {
         $resource = $this->resourcesRepository->find($id);

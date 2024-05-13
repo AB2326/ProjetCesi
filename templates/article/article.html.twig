@@ -42,11 +42,17 @@
     }
 </style>
 <div class="article">
-    <h1 class="article-title">{{ resource.title }}</h1>
+    <h1 class="article-title">
+        {{ resource.title }}
+    </h1>
     <p class="article-content">
         {{ resource.content }}
     </p>
+    <span>Contenu à rajouter censé afficher le nom du gars qui a fait l'article</span>
+
     <p class="article-date"></p>
 </div>
+{% include 'modal/publish.html.twig' %}
 </body>
+
 </html>
