@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Info Gouv!{% endblock %}</title>
+    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -52,7 +52,35 @@
 
     <p class="article-date"></p>
 </div>
-{% include 'modal/publish.html.twig' %}
+
+<!-- Espace commentaire -->
+<div class="container-fluid" style="display: flex; flex-direction: column; margin-top: 50px; margin-left: 200px;">
+    {{ form_start(form) }}
+    <div class="mb-3">
+        <div class="editor-toolbar"
+             style="border: 1px solid #ccc; border-bottom: 0; max-width: 800px; padding: 5px; background: #f9f9f9;">
+            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>
+        </div>
+
+        {{ form_widget(form.content, {
+            'attr': {
+                'class': 'form-control',
+                'rows': 10,
+                'style': 'border-radius: 0; height: 200px; width: 800px; text-align: left; vertical-align: top; overflow-y: auto;',
+            }
+        }) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Publier</button>
+    {{ form_end(form) }}
+</div>
+
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
 </body>
 
 </html>

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Resources;
+use App\Form\CommentType;
 use App\Form\ResourcesType;
+use App\Repository\CommentRepository;
 use Doctrine\Common\Util\ClassUtils;
 
 use App\Repository\ResourcesRepository;
@@ -19,11 +21,15 @@ class ResourcesController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private ResourcesRepository $resourcesRepository;
+    private CommentRepository $commentRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, ResourcesRepository $resourcesRepository)
+    public function __construct(EntityManagerInterface $entityManager,
+                                ResourcesRepository $resourcesRepository,
+                                CommentRepository $commentRepository)
     {
         $this->entityManager = $entityManager;
         $this->resourcesRepository = $resourcesRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     #[Route('/resources', name: 'app_resources')]
@@ -40,8 +46,14 @@ class ResourcesController extends AbstractController
     public function getResourceById(int $id): Response
     {
         $resource = $this->resourcesRepository->find($id);
+//        if($idComment){
+//            $comment = $this->commentRepository->find($idComment);
+//        }
+        $form = $this->createForm(CommentType::class, $resource);
         return $this->render('article/article.html.twig', [
             'resource' => $resource,
+//            'comment' => $comment,
+            'form' => $form
         ]);
     }
 
