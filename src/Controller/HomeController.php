@@ -24,7 +24,6 @@ class HomeController extends AbstractController
     {
         $resources = $this->resourcesRepository->findAll();
         $user = $this->security->getUser();
-        var_dump($user);
         return $this->render('home/index.html.twig', [
             'resources' => $resources,
             'user' => $user,

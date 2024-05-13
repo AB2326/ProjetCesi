@@ -10,8 +10,12 @@ services:
         autowire: true
         autoconfigure: true
 
+    App\Security\LoginFormAuthenticator:
+        autowire: true
+        autoconfigure: true
+
+    Symfony\Component\Security\Guard\GuardAuthenticatorHandler: '@security.guard_handler'
     Symfony\Component\Security\Core\Security: ~
-    Symfony\Component\Security\Guard\GuardAuthenticatorHandler: '@security.authentication.guard_handler'
 
     App\:
         resource: '../src/'
