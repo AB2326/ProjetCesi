@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Resources;
 use App\Form\CommentType;
 use App\Form\ResourcesType;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
-
+use Symfony\Component\Validator\Constraints\Date;
 
 class ResourcesController extends AbstractController
 {
@@ -43,19 +44,51 @@ class ResourcesController extends AbstractController
     }
 
     #[Route('/resource/{id}', name: 'resource_page')]
-    public function getResourceById(int $id): Response
+    public function getResourceById(int $id, Request $request): Response
     {
         $resource = $this->resourcesRepository->find($id);
-//        if($idComment){
-//            $comment = $this->commentRepository->find($idComment);
-//        }
-        $form = $this->createForm(CommentType::class, $resource);
+        $comments = $this->commentRepository->findByIdRessource($id);
+        $comment = new Comment(); 
+    
+        $form = $this->createForm(CommentType::class, $comment); 
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData(); 
+    
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setResourceId($id);
+    
+            // Récupérer l'utilisateur actuellement authentifié
+            $user = $this->getUser();
+            if ($user !== null) {
+                // Si l'utilisateur est authentifié, récupérez son ID et associez-le au commentaire
+                $userId = $user->getId(); 
+                $comment->setUserId($userId);
+            } else {
+                // Gérer le cas où aucun utilisateur n'est authentifié
+                // Par exemple, rediriger vers une page de connexion ou générer une erreur
+            }
+    
+            $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+    
+            // Rafraîchir les commentaires après l'ajout du nouveau commentaire
+            $comments = $this->commentRepository->findByIdRessource($id);
+        }
+    
         return $this->render('article/article.html.twig', [
             'resource' => $resource,
-//            'comment' => $comment,
-            'form' => $form
+            'comments' => $comments,
+            'form' => $form->createView()
         ]);
     }
+    
+    
+
+    
+    
 
     #[Route('/createResource', name: 'create_resource')]
     public function createResource(Request $request): Response

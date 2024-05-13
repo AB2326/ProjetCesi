@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use Doctrine\DBAL\Types\Types;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -21,30 +22,28 @@ class Comment
     private ?string $status = null;
 
     #[ORM\Column]
-    private ?bool $isDeleted = null;
+    private bool $isDeleted = false;
 
-    /**
-     * @var DateTimeInterface|DateTime|null
-     */
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private DateTimeInterface|DateTime|null $createdAt = null;
+    #[ORM\Column(type: "datetime")]
+    private ?DateTimeInterface $createdAt = null;
 
-    /**
-     * @return DateTime|DateTimeInterface|null
-     */
-    public function getCreatedAt(): DateTimeInterface|DateTime|null
+    #[ORM\Column(name: "id_ressource", type: "integer")]
+    private ?int $resourceId = null;
+
+    #[ORM\Column(name: "id_user", type: 'integer', nullable: true)]
+    private ?int $idUser = null; // Nouvelle colonne id_user
+
+    public function getIdUser(): ?int
     {
-        return $this->createdAt;
+        return $this->idUser;
     }
 
-    /**
-     * @param DateTime|DateTimeInterface|null $createdAt
-     */
-    public function setCreatedAt(DateTimeInterface|DateTime|null $createdAt): void
+    public function setIdUser(?int $idUser): self
     {
-        $this->createdAt = $createdAt;
-    }
+        $this->idUser = $idUser;
 
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -82,7 +81,7 @@ class Comment
         return $this;
     }
 
-    public function isIsDeleted(): ?bool
+    public function getIsDeleted(): bool
     {
         return $this->isDeleted;
     }
@@ -94,4 +93,25 @@ class Comment
         return $this;
     }
 
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getResourceId(): ?int
+    {
+        return $this->resourceId;
+    }
+
+    public function setResourceId(?int $resourceId): self
+    {
+        $this->resourceId = $resourceId;
+
+        return $this;
+    }
 }

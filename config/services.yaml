@@ -10,12 +10,13 @@ services:
         autowire: true
         autoconfigure: true
 
+    Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface: '@security.password_encoder'
+    
     App\Security\LoginFormAuthenticator:
         autowire: true
         autoconfigure: true
 
-    Symfony\Component\Security\Guard\GuardAuthenticatorHandler: '@security.guard_handler'
-    Symfony\Component\Security\Core\Security: ~
+
 
     App\:
         resource: '../src/'

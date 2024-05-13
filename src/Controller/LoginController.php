@@ -12,6 +12,9 @@ use App\Entity\User;
 use App\Form\LoginType;
 use DateTime;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class LoginController extends AbstractController
 {
@@ -53,29 +56,35 @@ class LoginController extends AbstractController
     }
 
     #[Route('/login', name: 'app_login')]
-    public function login(Request $request, EntityManagerInterface $entityManager): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(LoginType::class);
-    
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        $form = $this->createForm(LoginType::class, [
+            'email' => $lastUsername,
+        ]);
+
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-    
-            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $formData['email']]);
-    
+
+            $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $formData['email']]);
+
             if ($user) {
-                $user->setIsConnected(true);
-                $entityManager->flush(); 
-                
-                return $this->redirectToRoute('app_home');
-            } 
+                if ($passwordEncoder->isPasswordValid($user, $formData['password'])) {
+                    return $this->redirectToRoute('app_home');
+                }
+            }
+
+            $this->addFlash('error', 'Invalid credentials.');
         }
-    
+
         return $this->render('login/index.html.twig', [
             'form' => $form->createView(),
+            'error' => $error,
         ]);
     }
-    
-    
 }
