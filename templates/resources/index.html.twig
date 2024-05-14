@@ -1,4 +1,33 @@
 <!DOCTYPE html>
+
+{% block stylesheet %}
+<style>
+    .article {
+        border: 1px solid #ccc; /* Bordure pour chaque article */
+        margin-bottom: 20px; /* Espacement entre les articles */
+        padding: 10px; /* Espacement interne */
+        background-color: white; /* Fond blanc pour les cartes */
+    }
+
+    .article .entete h2 {
+        margin: 0; /* Pas de marge pour le titre */
+        color: #0056b3; /* Couleur du titre */
+    }
+
+    .article-content {
+        margin-top: 10px; /* Espacement après l'en-tête */
+        word-wrap: break-word; /* Permet la césure des mots */
+    }
+
+    .buttons button {
+        margin-right: 5px; /* Espacement entre les boutons */
+    }
+
+    .consulter .view-more-button {
+        margin-top: 10px; /* Espacement au-dessus du bouton 'Voir plus' */
+    }
+</style>
+{% endblock %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
