@@ -33,15 +33,6 @@ class ResourcesController extends AbstractController
         $this->commentRepository = $commentRepository;
     }
 
-    #[Route('/resources', name: 'app_resources')]
-    public function index(): Response
-    {
-        $resources = $this->resourcesRepository->findAll();
-
-        return $this->render('resources/index.html.twig', [
-            'resources' => $resources,
-        ]);
-    }
 
     #[Route('/resource/{id}', name: 'resource_page')]
     public function getResourceById(int $id, Request $request): Response
@@ -122,5 +113,20 @@ class ResourcesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_home');
+    }
+    #[Route('/editResource/{id}', name: 'edit_article', methods: ['GET', 'UPDATE'])]
+    public function editResource(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $resource = $this->resourcesRepository->find($id);
+
+        if (!$resource) {
+            throw $this->createNotFoundException('Resource not found');
+        }
+
+        $resource->setUpdatedAt(new \DateTime());
+        $entityManager->persist($resource);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('modal/publish.html.twig');
     }
 }

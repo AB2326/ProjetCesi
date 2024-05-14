@@ -4,6 +4,9 @@
             <a class="navbar-brand" href="/">
                 <span class="navbar-brand-text">(RE)SOURCES RELATIONNELLES!</span>
             </a>
+            {% if not app.user %}
+                <div class="snackbar">VOUS N'ETES PAS CONNECTE, VOTRE ACCES AU SITE EST RESTREINT !</div>
+            {% endif %}
             <div class="accessibility-button">
                 <span>Accessibilité</span>
                 <a href=""><i class="fas fa-lightbulb"></i></a>
@@ -15,41 +18,64 @@
                     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
+
                 <div class="d-flex">
-                    <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
-                    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="btn btn-outline-light me-2">Déconnexion</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
     </header>
 </head>
+{% block stylesheets %}
+    <style>
+        .snackbar {
+            visibility: visible; /* Make the snackbar visible by default */
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: red; /* Change the background color to red */
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
 
-<style>
-    header {
-        background-color: #0055a4; /* Couleur bleue pour la navbar */
-        color: white;
-        padding: 10px 20px; /* Espacement autour des éléments de la navbar */
-    }
+        /* Remove the fadeout animation */
+        /* Remove the animation property for .snackbar.show */
+        /* Remove the @keyframes for fadeout */
 
-    .navbar-brand {
-        color: white; /* Logo ou texte en blanc */
-        text-decoration: none; /* Pas de soulignement */
-    }
+        /* Keep the fadein animation */
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+    </style>
+{% endblock %}
 
-    .navbar-brand-text {
-        font-weight: bold; /* Texte en gras */
-    }
+{% block javascripts %}
+    <script>
+        // Remove the setTimeout function from the showSnackbar function
+        function showSnackbar() {
+            var snackbar = document.querySelector('.snackbar');
+            snackbar.classList.add('show');
+            // Remove the setTimeout function
+        }
 
-    .accessibility-button a, .navbar a.btn {
-        color: white; /* Liens en blanc */
-        background: transparent;
-        border: 2px solid white; /* Bordure blanche pour les boutons */
-        padding: 5px 10px; /* Padding pour les boutons */
-        border-radius: 5px; /* Bordures arrondies */
-        text-decoration: none; /* Pas de soulignement */
-    }
+        // Call showSnackbar function when the page loads if the user is not logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            {% if not app.user %}
+            showSnackbar();
+            {% endif %}
+        });
+    </script>
+{% endblock %}
 
-    .accessibility-button i {
-        margin-left: 5px; /* Espacement à gauche de l'icône */
-    }
-</style>

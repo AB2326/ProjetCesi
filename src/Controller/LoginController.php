@@ -50,7 +50,7 @@ class LoginController extends AbstractController
             $user->setEmail($userData['email']);
             $user->setPhone($userData['phone']);
             $user->setCreatedAt($date);
-
+            $user->setIsConnected(1);
             $hashedPassword = password_hash($userData['firstPassword'], PASSWORD_DEFAULT);
             $user->setPassword($hashedPassword);
 

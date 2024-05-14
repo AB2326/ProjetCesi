@@ -1,3 +1,5 @@
+{% if app.user %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -93,9 +95,11 @@
 </head>
 <body>
 <div class="article-container">
-    <h1 class="article-title">
-        {{ resource.title }}
+    <h1 class="article-title d-flex justify-content-between">
+        <span>{{ resource.title }}</span>
+        <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>
     </h1>
+
     <p class="article-content">
         {{ resource.content }}
     </p>
@@ -152,3 +156,7 @@
 {% endblock %}
 </body>
 </html>
+{% else %}
+Vous n'avez pas accès à cette page du site veuillez vous connecter ->  <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
+    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
+{% endif %}
