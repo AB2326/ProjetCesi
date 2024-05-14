@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -61,14 +62,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $country = null;
 
 
-    #[ORM\Column(length: 180)]
-    private ?string $username = null;
+    // #[ORM\Column(length: 180)]
+    // private ?string $username = null;
 
     /**
      * @var list<string> The user roles
      */
-    #[ORM\Column]
+    #[ORM\Column(type: "json")]
     private array $roles = [];
+    
 
     /**
      * @return string|null
@@ -299,17 +301,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return $this->username;
+        return $this->getUserIdentifier();
     }
 
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
+    // public function setUsername(string $username): static
+    // {
+    //     $this->username = $username;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * A visual identifier that represents this user.
@@ -318,7 +320,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->username;
+        return (string)$this->email;
     }
 
     /**
