@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
+    {% include 'header/header.html.twig' %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        {%  include 'resources/index.html.twig' %}
+    {% endblock %}
+</body>
+</html>

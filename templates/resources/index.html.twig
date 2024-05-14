@@ -23,14 +23,17 @@
                         <h2>{{ resource.title }}</h2>
                         <a href="{{ path('app_deleteResource', {'id': resource.id}) }}" class="delete-button btn btn-danger"><i class="fas fa-trash"></i></a>
                     </div>
-                    <p>{{ resource.content }}</p>
+                    <div class="article-content" style="width: 500px; word-wrap: break-word;">
+                        {% set words = resource.content | split(' ') %}
+                        {{ words | slice(0, 30) | join(' ') }}{% if words|length > 30 %} ...{% endif %}
+                    </div>
                     <div class="buttons">
                         <button class="like-button btn btn-primary"><i class="fas fa-thumbs-up"></i></button>
                         <button class="dislike-button btn btn-danger"><i class="fas fa-thumbs-down"></i></button>
                         <button class="favorite-button btn btn-warning"><i class="fas fa-star"></i></button>
                     </div>
                     <div class="consulter" style="display: flex; justify-content: space-between; align-items: center;">
-                        <a href="{{ path('resource_page', {'id': resource.id}) }}" class="view-more-button btn btn-success">View More</a>
+                        <a href="{{ path('resource_page', {'id': resource.id}) }}" class="view-more-button btn btn-success">Voir plus</a>
                     </div>
 
                 </div>

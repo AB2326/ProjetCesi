@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.article-container {
+    margin: 50px auto; /* Centrer l'article horizontalement */
+    width: 70%; /* Définir une largeur pour l'article */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Ajouter un espace intérieur */
+}
+
+.article-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.article-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    text-align: justify;
+}
+
+.article-meta {
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.comment-form-container {
+    margin: 50px auto; /* Centrer la zone de commentaire horizontalement */
+    width: 70%; /* Définir une largeur pour la zone de commentaire */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Ajouter un espace intérieur */
+}
+
+.editor-toolbar {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}

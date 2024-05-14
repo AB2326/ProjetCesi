@@ -13,7 +13,6 @@ services:
 
     # Utilisation de security.encoder_factory pour créer des encodeurs de mots de passe
     Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface:
-        alias: security.encoder_factory
 
     App\Security\LoginFormAuthenticator:
         autowire: true

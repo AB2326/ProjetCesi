@@ -1,64 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     {% include 'header/header.html.twig' %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .article-container {
+            margin: 50px auto;
+            width: 70%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .article-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .article-content {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            text-align: justify;
+        }
+
+        .article-meta {
+            font-size: 14px;
+            color: #999;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .comment-container {
+            margin-top: 30px;
+        }
+
+        .comment {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-content {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .comment-meta {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .comment-user {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .comment-form-container {
+            margin: 50px auto; /* Center the comment form container horizontally */
+            width: 70%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .editor-toolbar {
+            border: 1px solid #ccc;
+            border-bottom: 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        padding: 0;
-        background-color: #f5f5f5;
-    }
-
-    .article {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .article-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .article-content {
-        line-height: 1.6;
-        color: #333;
-    }
-
-    .article-date {
-        font-size: 14px;
-        color: #999;
-    }
-</style>
-<div class="article">
+<div class="article-container">
     <h1 class="article-title">
         {{ resource.title }}
     </h1>
     <p class="article-content">
         {{ resource.content }}
     </p>
-    <span>Contenu à rajouter censé afficher le nom du gars qui a fait l'article</span>
+    <p class="article-meta">
+        Publié le
+    </p>
 
-    <p class="article-date"></p>
+    <div class="comment-container">
+        <h2>Commentaires</h2>
+        {% for comment in comments %}
+            <div class="comment" style="display: flex; justify-content: space-between;">
+                <div>
+                    <p class="comment-content">{{ comment.content }}</p>
+                    <p class="comment-meta">Posté par {{ comment.id_user }}</p>
+                </div>
+                <div>
+                    <a href="{{ path('app_delete_comment', {'id': comment.id}) }}" class="delete-comment-button btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 </div>
 
 <!-- Espace commentaire -->
-<div class="container-fluid" style="display: flex; flex-direction: column; margin-top: 50px; margin-left: 200px;">
+<div class="comment-form-container">
     {{ form_start(form) }}
     <div class="mb-3">
-        <div class="editor-toolbar"
-             style="border: 1px solid #ccc; border-bottom: 0; max-width: 800px; padding: 5px; background: #f9f9f9;">
+        <div class="editor-toolbar">
             <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
             <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
             <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
@@ -70,7 +136,7 @@
             'attr': {
                 'class': 'form-control',
                 'rows': 10,
-                'style': 'border-radius: 0; height: 200px; width: 800px; text-align: left; vertical-align: top; overflow-y: auto;',
+                'style': 'border-radius: 0; height: 200px; width: 100%; text-align: left; vertical-align: top; overflow-y: auto;',
             }
         }) }}
     </div>
@@ -82,5 +148,4 @@
     {% block importmap %}{{ importmap('app') }}{% endblock %}
 {% endblock %}
 </body>
-
 </html>

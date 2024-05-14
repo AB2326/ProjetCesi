@@ -48,7 +48,7 @@ class ResourcesController extends AbstractController
     {
         $resource = $this->resourcesRepository->find($id);
         $comments = $this->commentRepository->findByIdRessource($id);
-        $comment = new Comment(); 
+        $comment = new Comment();
     
         $form = $this->createForm(CommentType::class, $comment); 
     
@@ -84,12 +84,6 @@ class ResourcesController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-    
-    
-
-    
-    
-
     #[Route('/createResource', name: 'create_resource')]
     public function createResource(Request $request): Response
     {

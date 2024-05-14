@@ -89,12 +89,12 @@ class Resources
     #[ORM\Column]
     private ?bool $isRestricted = null;
 
-    /**
-     * @var User|null
-     */
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $createdBy = null;
+//    /**
+//     * @var User|null
+//     */
+//    #[ORM\ManyToOne(targetEntity: User::class)]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?User $createdBy = null;
 
     /**
      * @return User|null

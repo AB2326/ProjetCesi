@@ -27,6 +27,25 @@ class Comment
     #[ORM\Column(type: "datetime")]
     private ?DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(type: "datetime")]
+    private ?DateTimeInterface $deletedAt = null;
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getDeletedAt(): ?DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param DateTimeInterface|null $deletedAt
+     */
+    public function setDeletedAt(?DateTimeInterface $deletedAt): void
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
     #[ORM\Column(name: "id_ressource", type: "integer")]
     private ?int $resourceId = null;
 
