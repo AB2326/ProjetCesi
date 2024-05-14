@@ -11,10 +11,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    # Utilisation de security.encoder_factory.generic pour créer des encodeurs de mots de passe
-    Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface:
-        alias: security.encoder_factory.generic
-
     App\Security\LoginFormAuthenticator:
         autowire: true
         autoconfigure: true
