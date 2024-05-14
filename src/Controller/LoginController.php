@@ -26,12 +26,13 @@ class LoginController extends AbstractController
     private $tokenStorage;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserPasswordEncoderInterface  $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->passwordEncoder = $passwordEncoder;
     }
+    
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, EntityManagerInterface $em)
