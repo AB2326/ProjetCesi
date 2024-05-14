@@ -243,4 +243,5 @@ class User
 
         return $this;
     }
+
 }
