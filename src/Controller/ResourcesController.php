@@ -49,8 +49,7 @@ class ResourcesController extends AbstractController
         $resource = $this->resourcesRepository->find($id);
         $comments = $this->commentRepository->findByIdRessource($id);
         $comment = new Comment();
-    
-        $form = $this->createForm(CommentType::class, $comment); 
+        $form = $this->createForm(CommentType::class, $comment);
     
         $form->handleRequest($request);
     
@@ -124,6 +123,4 @@ class ResourcesController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
-
-
 }

@@ -21,9 +21,10 @@ class CommentController extends AbstractController
     /**
      * @param CommentRepository $commentRepository
      */
-    public function __construct(CommentRepository $commentRepository)
+    public function __construct(CommentRepository $commentRepository, EntityManagerInterface $entityManager)
     {
         $this->commentRepository = $commentRepository;
+        $this->entityManager = $entityManager;
     }
 
     #[Route('/comment', name: 'app_comment')]
@@ -33,6 +34,7 @@ class CommentController extends AbstractController
             'controller_name' => 'CommentController',
         ]);
     }
+
     #[\Symfony\Component\Routing\Annotation\Route('/createComment', name: 'create_comment')]
     public function createComment(Request $request): Response
     {
@@ -51,20 +53,20 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
     }
-    #[\Symfony\Component\Routing\Annotation\Route('/deleteComment', name: 'app_delete_comment')]
-    public function deletecomment(int $id, EntityManagerInterface $entityManager): Response
+
+    #[Route('/deleteComment/{id}', name: 'app_delete_comment')]
+    public function deleteComment(int $id): Response
     {
-        $comment = $this->commentRepository->findByIdRessource($id);
+        $comment = $this->commentRepository->find($id);
 
         if ($comment) {
-
             $comment->setDeletedAt(new DateTime());
             $comment->setIsDeleted(1);
-
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_home');
         }
+
+        // Redirect to the resource page with the resourceId from the comment entity
+        return $this->redirectToRoute('resource_page', ['id' => $comment->getResourceId()]);
     }
 }

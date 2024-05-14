@@ -100,22 +100,25 @@
         {{ resource.content }}
     </p>
     <p class="article-meta">
-        Publié le
+        Publié le {{ resource.createdAt | date('d/m/Y H:i:s') }}
     </p>
 
     <div class="comment-container">
         <h2>Commentaires</h2>
-        {% for comment in comments %}
-            <div class="comment" style="display: flex; justify-content: space-between;">
-                <div>
-                    <p class="comment-content">{{ comment.content }}</p>
-                    <p class="comment-meta">Posté par {{ comment.id_user }}</p>
-                </div>
-                <div>
-                    <a href="{{ path('app_delete_comment', {'id': comment.id}) }}" class="delete-comment-button btn btn-danger">Supprimer</a>
-                </div>
-            </div>
-        {% endfor %}
+            {% for comment in comments %}
+                {% if comment.deletedAt is null %}
+                    <div class="comment" style="display: flex; justify-content: space-between;">
+                        <div>
+                            <p class="comment-content">{{ comment.content }}</p>
+                            <p class="comment-meta">Posté par </p>
+                        </div>
+                        <div>
+                            <a href="{{ path('app_delete_comment', {'id': comment.id}) }}"
+                               class="delete-comment-button btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
     </div>
 
 </div>
