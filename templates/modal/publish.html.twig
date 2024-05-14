@@ -3,26 +3,24 @@
     <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     {% include 'header/header.html.twig' %}
 </head>
 <body>
-<div class="container-fluid" style="display: flex; flex-direction: column; margin-top: 50px; margin-left: 200px;">
+<div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; margin-top: 50px;">
     {{ form_start(form) }}
-    <div class="mb-3">
+    <div class="mb-3" style="width: 800px;">
         {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'form-label'}}) }}
         {{ form_widget(form.title, {
             'attr': {
                 'class': 'form-control',
-                'style': 'width: 800px; text-align: left; vertical-align: top;',
+                'style': 'text-align: left;',
             }
         }) }}
     </div>
-    <div class="mb-3">
+    <div class="mb-3" style="width: 800px;">
         {{ form_label(form.content, 'Contenu de l\'article', {'label_attr': {'class': 'form-label'}}) }}
 
-        <div class="editor-toolbar"
-             style="border: 1px solid #ccc; border-bottom: 0; max-width: 800px; padding: 5px; background: #f9f9f9;">
+        <div class="editor-toolbar" style="border: 1px solid #ccc; border-bottom: 0; padding: 5px; background: #f9f9f9;">
             <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
             <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
             <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
@@ -34,7 +32,7 @@
             'attr': {
                 'class': 'form-control',
                 'rows': 10,
-                'style': 'border-radius: 0; height: 200px; width: 800px; text-align: left; vertical-align: top; overflow-y: auto;',
+                'style': 'border-radius: 0; height: 200px; text-align: left; overflow-y: auto;',
             }
         }) }}
     </div>
