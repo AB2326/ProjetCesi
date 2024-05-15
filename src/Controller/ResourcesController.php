@@ -43,28 +43,28 @@ class ResourcesController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
     
         $form->handleRequest($request);
-    
+        $userComment = [];
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData(); 
-    
+            $comment = $form->getData();
             $comment->setCreatedAt(new \DateTime());
             $comment->setResourceId($id);
-    
+
             $user = $this->getUser();
             if ($user !== null) {
                 $userId = $user->getId(); 
-                $comment->setUserId($userId);
+                $comment->setIdUser($userId);
             } 
     
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
-    
+            $idComment = $comment->getId();
             $comments = $this->commentRepository->findByIdRessource($id);
         }
     
         return $this->render('article/article.html.twig', [
             'resource' => $resource,
             'comments' => $comments,
+            'userComment' => $userComment,
             'form' => $form->createView()
         ]);
     }

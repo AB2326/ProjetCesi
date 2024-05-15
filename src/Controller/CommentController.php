@@ -45,7 +45,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $comment->setCreatedAt(new DateTime());
-            $comment->setIsDeleted(false);
+            $comment->setDeletedAt(new DateTime());
 
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
@@ -61,7 +61,6 @@ class CommentController extends AbstractController
 
         if ($comment) {
             $comment->setDeletedAt(new DateTime());
-            $comment->setIsDeleted(1);
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
         }

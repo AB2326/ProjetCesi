@@ -69,10 +69,6 @@
             color: #999;
         }
 
-        .comment-user {
-            font-weight: bold;
-            color: #007bff;
-        }
 
         .comment-form-container {
             margin: 50px auto; /* Center the comment form container horizontally */
@@ -114,7 +110,7 @@
                     <div class="comment" style="display: flex; justify-content: space-between;">
                         <div>
                             <p class="comment-content">{{ comment.content }}</p>
-                            <p class="comment-meta">Posté par </p>
+                                <p class="comment-meta">Posté le {{ comment.createdAt | date('d/m/Y H:i:s') }} </p>
                         </div>
                         <div>
                             <a href="{{ path('app_delete_comment', {'id': comment.id}) }}"

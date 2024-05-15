@@ -20,10 +20,6 @@ class Comment
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
-
-    #[ORM\Column]
-    private bool $isDeleted = false;
-
     #[ORM\Column(type: "datetime")]
     private ?DateTimeInterface $createdAt = null;
 
@@ -96,18 +92,6 @@ class Comment
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getIsDeleted(): bool
-    {
-        return $this->isDeleted;
-    }
-
-    public function setIsDeleted(bool $isDeleted): static
-    {
-        $this->isDeleted = $isDeleted;
 
         return $this;
     }

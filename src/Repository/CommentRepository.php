@@ -33,5 +33,16 @@ class CommentRepository extends ServiceEntityRepository
     
         return $query->getResult();
     }
-    
+
+    public function findUserComment(int $idComment): array
+    {
+        $entityManager = $this->getEntityManager();
+        return $entityManager->createQuery(
+            'SELECT u.firstname, u.lastname
+        FROM App\Entity\User u
+        JOIN App\Entity\Comment c
+        WHERE c.id = :id'
+        )->setParameter('id', $idComment)
+            ->getResult();
+    }
 }
