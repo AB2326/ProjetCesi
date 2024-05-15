@@ -108,19 +108,32 @@ class ResourcesController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
-    #[Route('/editResource/{id}', name: 'edit_article', methods: ['GET', 'UPDATE'])]
-    public function editResource(int $id, EntityManagerInterface $entityManager): Response
+    #[Route('/editResource/{id}', name: 'edit_article')]
+    public function editResource(int $id, EntityManagerInterface $entityManager, Request $request): Response
     {
         $resource = $this->resourcesRepository->find($id);
+
+        $form = $this->createForm(ResourcesType::class, $resource);
+        $form->handleRequest($request);
 
         if (!$resource) {
             throw $this->createNotFoundException('Resource not found');
         }
 
-        $resource->setUpdatedAt(new \DateTime());
-        $entityManager->persist($resource);
-        $entityManager->flush();
+        if($form->isSubmitted() && $form->isValid()){
 
-        return $this->redirectToRoute('modal/publish.html.twig');
+            $resource->setUpdatedAt(new \DateTime());
+            $entityManager->persist($resource);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('resource_page', ['id' => $resource->getId()]);
+
+        }
+
+
+        return $this->render('resources/edit.html.twig', [
+            'resource' => $resource,
+            'form' => $form,
+        ]);    
     }
 }
