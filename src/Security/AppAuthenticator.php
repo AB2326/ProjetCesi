@@ -44,12 +44,10 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // Attempt to redirect to a saved URL (from session) if available
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
     
-        // Default redirect if no target path set
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
     

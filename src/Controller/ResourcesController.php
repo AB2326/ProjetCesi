@@ -50,21 +50,15 @@ class ResourcesController extends AbstractController
             $comment->setCreatedAt(new \DateTime());
             $comment->setResourceId($id);
     
-            // Récupérer l'utilisateur actuellement authentifié
             $user = $this->getUser();
             if ($user !== null) {
-                // Si l'utilisateur est authentifié, récupérez son ID et associez-le au commentaire
                 $userId = $user->getId(); 
                 $comment->setUserId($userId);
-            } else {
-                // Gérer le cas où aucun utilisateur n'est authentifié
-                // Par exemple, rediriger vers une page de connexion ou générer une erreur
-            }
+            } 
     
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
     
-            // Rafraîchir les commentaires après l'ajout du nouveau commentaire
             $comments = $this->commentRepository->findByIdRessource($id);
         }
     

@@ -66,7 +66,6 @@ class CommentController extends AbstractController
             $this->entityManager->flush();
         }
 
-        // Redirect to the resource page with the resourceId from the comment entity
         return $this->redirectToRoute('resource_page', ['id' => $comment->getResourceId()]);
     }
 }

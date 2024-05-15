@@ -50,7 +50,7 @@ class Comment
     private ?int $resourceId = null;
 
     #[ORM\Column(name: "id_user", type: 'integer', nullable: true)]
-    private ?int $idUser = null; // Nouvelle colonne id_user
+    private ?int $idUser = null; 
 
     public function getIdUser(): ?int
     {

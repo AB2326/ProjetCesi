@@ -96,21 +96,21 @@ class Resources
 //    #[ORM\JoinColumn(nullable: false)]
 //    private ?User $createdBy = null;
 
-    /**
-     * @return User|null
-     */
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
+    // /**
+    //  * @return User|null
+    //  */
+    // public function getCreatedBy(): ?User
+    // {
+    //     return $this->createdBy;
+    // }
 
-    /**
-     * @param User|null $createdBy
-     */
-    public function setCreatedBy(?User $createdBy): void
-    {
-        $this->createdBy = $createdBy;
-    }
+    // /**
+    //  * @param User|null $createdBy
+    //  */
+    // public function setCreatedBy(?User $createdBy): void
+    // {
+    //     $this->createdBy = $createdBy;
+    // }
 
     /**
      *
