@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
     <header>
         <div class="container-fluid navbar">
             <a class="navbar-brand" href="/">
@@ -9,7 +13,7 @@
             {% endif %}
             <div class="accessibility-button">
                 <span>Accessibilité</span>
-                <a href=""><i class="fas fa-lightbulb"></i></a>
+                <a href="#" class="accessibility-trigger"><i class="fas fa-lightbulb"></i></a>
             </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0055a4;">
@@ -31,6 +35,11 @@
         </nav>
     </header>
 </head>
+<body>
+{% block body %}
+{% endblock %}
+</body>
+
 {% block stylesheets %}
     <style>
         .snackbar {
@@ -49,33 +58,32 @@
             font-size: 17px;
         }
 
-        /* Remove the fadeout animation */
-        /* Remove the animation property for .snackbar.show */
-        /* Remove the @keyframes for fadeout */
-
-        /* Keep the fadein animation */
-        @keyframes fadein {
-            from {bottom: 0; opacity: 0;}
-            to {bottom: 30px; opacity: 1;}
+        .blue-background {
+            background-color: blue !important;
         }
+        .yellow-text {
+            color: yellow !important;
+        }
+
     </style>
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        // Remove the setTimeout function from the showSnackbar function
-        function showSnackbar() {
-            var snackbar = document.querySelector('.snackbar');
-            snackbar.classList.add('show');
-            // Remove the setTimeout function
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const accessibilityButton = document.querySelector('.accessibility-trigger');
 
-        // Call showSnackbar function when the page loads if the user is not logged in
-        window.addEventListener('DOMContentLoaded', function() {
-            {% if not app.user %}
-            showSnackbar();
-            {% endif %}
+            accessibilityButton.addEventListener('click', function() {
+                document.body.classList.toggle('blue-background');
+                const articles = document.querySelectorAll('.article');
+
+                articles.forEach(function(article) {
+                    article.classList.toggle('yellow-text');
+                });
+            });
         });
+
+
     </script>
 {% endblock %}
-
+</html>
