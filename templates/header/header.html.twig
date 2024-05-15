@@ -61,6 +61,7 @@
         .blue-background {
             background-color: blue !important;
         }
+
         .yellow-text {
             color: yellow !important;
         }
@@ -70,20 +71,26 @@
 
 {% block javascripts %}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const accessibilityButton = document.querySelector('.accessibility-trigger');
 
-            accessibilityButton.addEventListener('click', function() {
+            accessibilityButton.addEventListener('click', function () {
                 document.body.classList.toggle('blue-background');
                 const articles = document.querySelectorAll('.article');
-
-                articles.forEach(function(article) {
+                articles.forEach(function (article) {
                     article.classList.toggle('yellow-text');
+                    article.classList.toggle('blue-background');
+                });
+                const titles = document.querySelectorAll('.article .entete h2 ');
+                titles.forEach(function (title) {
+                    title.classList.toggle('yellow-text');
+                });
+                const navtitles = document.querySelectorAll('.navbar-brand-text ');
+                navtitles.forEach(function (navtitle) {
+                    navtitle.classList.toggle('yellow-text');
                 });
             });
         });
-
-
     </script>
 {% endblock %}
 </html>
