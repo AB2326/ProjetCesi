@@ -129,8 +129,6 @@ class ResourcesController extends AbstractController
             return $this->redirectToRoute('resource_page', ['id' => $resource->getId()]);
 
         }
-
-
         return $this->render('resources/edit.html.twig', [
             'resource' => $resource,
             'form' => $form,

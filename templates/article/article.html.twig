@@ -1,158 +1,74 @@
-{% if app.user %}
+{#{% if app.user %}#}
+{#<head>#}
+{#    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>#}
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">#}
+{#    {% include 'header/header.html.twig' %}#}
+{#</head>#}
+{#<body>#}
+{#<div class="article-container">#}
+{#    <h1 class="article-title d-flex justify-content-between">#}
+{#        <span>{{ resource.title }}</span>#}
+{#        <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>#}
+{#    </h1>#}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    {% include 'header/header.html.twig' %}
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
+{#    <p class="article-content">#}
+{#        {{ resource.content }}#}
+{#    </p>#}
+{#    <p class="article-meta">#}
+{#        Publié le {{ resource.createdAt | date('d/m/Y H:i:s') }}#}
+{#    </p>#}
 
-        .article-container {
-            margin: 50px auto;
-            width: 70%;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
+{#    <div class="comment-container">#}
+{#        <h2>Commentaires</h2>#}
+{#            {% for comment in comments %}#}
+{#                {% if comment.deletedAt is null %}#}
+{#                    <div class="comment" style="display: flex; justify-content: space-between;">#}
+{#                        <div>#}
+{#                            <p class="comment-content">{{ comment.content }}</p>#}
+{#                                <p class="comment-meta">Posté le {{ comment.createdAt | date('d/m/Y H:i:s') }} </p>#}
+{#                        </div>#}
+{#                        <div>#}
+{#                            <a href="{{ path('app_delete_comment', {'id': comment.id}) }}"#}
+{#                               class="delete-comment-button btn btn-danger">Supprimer</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#    </div>#}
 
-        .article-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
+{#</div>#}
 
-        .article-content {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #666;
-            text-align: justify;
-        }
+{#<div class="comment-form-container">#}
+{#    {{ form_start(form) }}#}
+{#    <div class="mb-3">#}
+{#        <div class="editor-toolbar">#}
+{#            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>#}
+{#            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>#}
+{#            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>#}
+{#            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>#}
+{#            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>#}
+{#        </div>#}
 
-        .article-meta {
-            font-size: 14px;
-            color: #999;
-            text-align: right;
-            margin-top: 20px;
-        }
+{#        {{ form_widget(form.content, {#}
+{#            'attr': {#}
+{#                'class': 'form-control',#}
+{#                'rows': 10,#}
+{#                'style': 'border-radius: 0; height: 200px; width: 100%; text-align: left; vertical-align: top; overflow-y: auto;',#}
+{#            }#}
+{#        }) }}#}
+{#    </div>#}
+{#    <button type="submit" class="btn btn-primary">Publier</button>#}
+{#    {{ form_end(form) }}#}
+{#</div>#}
 
-        .comment-container {
-            margin-top: 30px;
-        }
-
-        .comment {
-            margin-bottom: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .comment-content {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .comment-meta {
-            font-size: 14px;
-            color: #999;
-        }
-
-
-        .comment-form-container {
-            margin: 50px auto; /* Center the comment form container horizontally */
-            width: 70%;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-
-        .editor-toolbar {
-            border: 1px solid #ccc;
-            border-bottom: 0;
-            padding: 10px;
-            background: #f9f9f9;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-<div class="article-container">
-    <h1 class="article-title d-flex justify-content-between">
-        <span>{{ resource.title }}</span>
-        <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>
-    </h1>
-
-    <p class="article-content">
-        {{ resource.content }}
-    </p>
-    <p class="article-meta">
-        Publié le {{ resource.createdAt | date('d/m/Y H:i:s') }}
-    </p>
-
-    <div class="comment-container">
-        <h2>Commentaires</h2>
-            {% for comment in comments %}
-                {% if comment.deletedAt is null %}
-                    <div class="comment" style="display: flex; justify-content: space-between;">
-                        <div>
-                            <p class="comment-content">{{ comment.content }}</p>
-                                <p class="comment-meta">Posté le {{ comment.createdAt | date('d/m/Y H:i:s') }} </p>
-                        </div>
-                        <div>
-                            <a href="{{ path('app_delete_comment', {'id': comment.id}) }}"
-                               class="delete-comment-button btn btn-danger">Supprimer</a>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-    </div>
-
-</div>
-
-<!-- Espace commentaire -->
-<div class="comment-form-container">
-    {{ form_start(form) }}
-    <div class="mb-3">
-        <div class="editor-toolbar">
-            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
-            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
-            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
-            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>
-            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>
-        </div>
-
-        {{ form_widget(form.content, {
-            'attr': {
-                'class': 'form-control',
-                'rows': 10,
-                'style': 'border-radius: 0; height: 200px; width: 100%; text-align: left; vertical-align: top; overflow-y: auto;',
-            }
-        }) }}
-    </div>
-    <button type="submit" class="btn btn-primary">Publier</button>
-    {{ form_end(form) }}
-</div>
-
-{% block javascripts %}
-    {% block importmap %}{{ importmap('app') }}{% endblock %}
-{% endblock %}
-</body>
-</html>
-{% else %}
-Vous n'avez pas accès à cette page du site veuillez vous connecter ->  <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
-    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
-{% endif %}
+{#{% block javascripts %}#}
+{#    {% block importmap %}{{ importmap('app') }}{% endblock %}#}
+{#{% endblock %}#}
+{#</body>#}
+{#{% else %}#}
+{#Vous n'avez pas accès à cette page du site veuillez vous connecter ->  <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>#}
+{#    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>#}
+{#{% endif %}#}
