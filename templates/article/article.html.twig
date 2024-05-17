@@ -4,14 +4,9 @@
 {% if app.user %}
     <head>
     <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    {% include 'header/header.html.twig' %}
 </head>
 <body>
-<div class="article-container">
+<div class="article-container" >
     <h1 class="article-title d-flex justify-content-between">
         <span>{{ resource.title }}</span>
         <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>

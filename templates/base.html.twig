@@ -10,9 +10,8 @@
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
 </head>
-<body>
     <header>
-        <div class="container-fluid navbar">
+        <div class="container-fluid navbar" >
             <a class="navbar-brand" href="/">
                 <span class="navbar-brand-text">(RE)SOURCES RELATIONNELLES!</span>
             </a>
@@ -44,5 +43,7 @@
     {% block body %}
     {% endblock %}
 
-</body>
+{% block footer %}
+
+{% endblock %}
 </html>
