@@ -1,11 +1,7 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Inscription{% endblock %}
-
 {% block stylesheets %}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href={{ asset("/styles/register.css") }}>
 {% endblock %}
-
 {% block body %}
     <main>
         <div class="container">
@@ -40,6 +36,8 @@
 
             <div class="form-footer">
                 <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous ici</a></p>
+                <p>Accéder au site en version restreinte :
+                    <a href="{{ path('app_home') }}">Accès restreint</a>
             </div>
         </div>
     </main>

@@ -18,10 +18,6 @@
                         <div class="article">
                             <div class="entete d-flex justify-content-between">
                                 <h2>{{ resource.title }}</h2>
-                                {% if app.user %}
-                                    <a href="{{ path('app_deleteResource', {'id': resource.id}) }}"
-                                       class="delete-button btn btn-danger"><i class="fas fa-trash"></i></a>
-                                {% endif %}
                             </div>
                             <div class="article-content">
                                 {% set words = resource.content | split(' ') %}

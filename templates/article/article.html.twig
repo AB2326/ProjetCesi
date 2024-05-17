@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
 {% if app.user %}
     <head>
     <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
-</head>
+    </head>
 <body>
 <div class="article-container" >
     <h1 class="article-title d-flex justify-content-between">
         <span>{{ resource.title }}</span>
-        <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+        {% if app.user %}
+            <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+            <a href="{{ path('app_deleteResource', {'id': resource.id}) }}"
+               class="delete-button btn btn-danger"><i class="fas fa-trash"></i></a>
+        {% endif %}
     </h1>
 
     <p class="article-content">
@@ -66,8 +69,8 @@
 {% endblock %}
 </body>
 {% else %}
-Vous n'avez pas accès à cette page du site veuillez vous connecter ->  <a href="{{ path('app_login') }}" class="btn btn-outline-light me-2">Connexion</a>
-    <a href="{{ path('app_register') }}" class="btn btn-outline-light me-2">Inscription</a>
-
+    <div class="message">
+        Vous n'avez pas accès à cette page du site veuillez vous connecter
+    </div>
 {% endif %}
 {% endblock %}
