@@ -14,8 +14,7 @@ class CommentType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Contenu du commentaire'
                 ]
-            ])
-        ;
+            ]);
     }
     public function configureOptions(OptionsResolver $resolver): void
     {
