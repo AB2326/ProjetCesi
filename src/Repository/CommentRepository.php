@@ -21,28 +21,28 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-//    /**
-//     * @return Comment[] Returns an array of Comment objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByIdRessource(int $id): array
+    {
+        $entityManager = $this->getEntityManager();
+    
+        $query = $entityManager->createQuery(
+            'SELECT c
+            FROM App\Entity\Comment c
+            WHERE c.resourceId = :id'
+        )->setParameter('id', $id);
+    
+        return $query->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Comment
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findUserComment(int $idComment): array
+    {
+        $entityManager = $this->getEntityManager();
+        return $entityManager->createQuery(
+            'SELECT u.firstname, u.lastname
+        FROM App\Entity\User u
+        JOIN App\Entity\Comment c
+        WHERE c.id = :id'
+        )->setParameter('id', $idComment)
+            ->getResult();
+    }
 }

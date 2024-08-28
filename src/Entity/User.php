@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +19,8 @@ class User
 
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
-
     #[ORM\Column(length: 50)]
     private ?string $lastname = null;
-
-    #[ORM\Column(length: 50)]
-    private ?string $username = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -62,72 +61,295 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $country = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
+    // #[ORM\Column(length: 180)]
+    // private ?string $username = null;
+
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column(type: "json")]
+    private array $roles = [];
+    
+
+    /**
+     * @return string|null
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): static
+    /**
+     * @param string|null $firstname
+     */
+    public function setFirstname(?string $firstname): void
     {
         $this->firstname = $firstname;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): static
+    /**
+     * @param string|null $lastname
+     */
+    public function setLastname(?string $lastname): void
     {
         $this->lastname = $lastname;
-
-        return $this;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    /**
+     * @param string|null $email
+     */
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): static
+    /**
+     * @param string|null $phone
+     */
+    public function setPhone(?string $phone): void
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    /**
+     * @param bool|null $verified
+     */
+    public function setVerified(?bool $verified): void
+    {
+        $this->verified = $verified;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $createdAt
+     */
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getLastConnection(): ?\DateTimeInterface
+    {
+        return $this->lastConnection;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $lastConnection
+     */
+    public function setLastConnection(?\DateTimeInterface $lastConnection): void
+    {
+        $this->lastConnection = $lastConnection;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSocialCredit(): ?int
+    {
+        return $this->socialCredit;
+    }
+
+    /**
+     * @param int|null $socialCredit
+     */
+    public function setSocialCredit(?int $socialCredit): void
+    {
+        $this->socialCredit = $socialCredit;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsConnected(): ?bool
+    {
+        return $this->isConnected;
+    }
+
+    /**
+     * @param bool|null $isConnected
+     */
+    public function setIsConnected(?bool $isConnected): void
+    {
+        $this->isConnected = $isConnected;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    /**
+     * @param bool|null $isActivated
+     */
+    public function setIsActivated(?bool $isActivated): void
+    {
+        $this->isActivated = $isActivated;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getZipCode(): ?string
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * @param string|null $zipCode
+     */
+    public function setZipCode(?string $zipCode): void
+    {
+        $this->zipCode = $zipCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string|null $address
+     */
+    public function setAddress(?string $address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string|null $region
+     */
+    public function setRegion(?string $region): void
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string|null $country
+     */
+    public function setCountry(?string $country): void
+    {
+        $this->country = $country;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
+    // public function setUsername(string $username): static
+    // {
+    //     $this->username = $username;
+
+    //     return $this;
+    // }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string)$this->email;
+    }
+
+    /**
+     * @return list<string>
+     * @see UserInterface
+     *
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -139,123 +361,11 @@ class User
         return $this;
     }
 
-    public function isVerified(): ?bool
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
     {
-        return $this->verified;
-    }
 
-    public function setVerified(bool $verified): static
-    {
-        $this->verified = $verified;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getLastConnection(): ?\DateTimeInterface
-    {
-        return $this->lastConnection;
-    }
-
-    public function setLastConnection(\DateTimeInterface $lastConnection): static
-    {
-        $this->lastConnection = $lastConnection;
-
-        return $this;
-    }
-
-    public function getSocialCredit(): ?int
-    {
-        return $this->socialCredit;
-    }
-
-    public function setSocialCredit(?int $socialCredit): static
-    {
-        $this->socialCredit = $socialCredit;
-
-        return $this;
-    }
-
-    public function isIsConnected(): ?bool
-    {
-        return $this->isConnected;
-    }
-
-    public function setIsConnected(bool $isConnected): static
-    {
-        $this->isConnected = $isConnected;
-
-        return $this;
-    }
-
-    public function isIsActivated(): ?bool
-    {
-        return $this->isActivated;
-    }
-
-    public function setIsActivated(bool $isActivated): static
-    {
-        $this->isActivated = $isActivated;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?string
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(string $zipCode): static
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): static
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(string $region): static
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): static
-    {
-        $this->country = $country;
-
-        return $this;
     }
 }

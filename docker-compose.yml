@@ -1,0 +1,37 @@
+services:
+  web:
+    image: php:8.2-apache
+    container_name: projetcesi
+    volumes:
+      - ./html:/var/www/html
+      - ./html/.env:/var/www/html/.env
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: dev
+      APP_SECRET: 9078cd416cfbf21eba8ea0ce2f9971ef
+      DATABASE_URL: mysql://user:userpassword@db:3306/infogouv?serverVersion=8.0.32&charset=utf8mb4
+    networks:
+      - my_network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: my_db
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: infogouv
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  db_data:

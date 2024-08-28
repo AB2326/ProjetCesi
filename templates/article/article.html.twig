@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if app.user %}
+    <head>
+    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
+    </head>
+<body>
+<div class="article-container" >
+    <h1 class="article-title d-flex justify-content-between">
+        <span>{{ resource.title }}</span>
+        {% if app.user %}
+            <div class="action-buttons">
+                <a href="{{ path('edit_article', {'id': resource.id}) }}" class="btn btn-primary btn-sm edit-button">
+                    <i class="fas fa-pencil-alt fa-sm"></i>
+                </a>
+                <button class="btn btn-danger btn-sm delete-button" data-toggle="modal" data-target="#deleteModal">
+                    <i class="fas fa-trash fa-sm"></i>
+                </button>
+            </div>
+        {% endif %}
+    </h1>
+
+    <p class="article-content">
+        {{ resource.content }}
+    </p>
+    <p class="article-meta">
+        Publié le {{ resource.createdAt | date('d/m/Y H:i:s') }}
+    </p>
+
+    <div class="comment-container">
+        <h2>Commentaires</h2>
+            {% for comment in comments %}
+                {% if comment.deletedAt is null %}
+                    <div class="comment" style="display: flex; justify-content: space-between;">
+                        <div>
+                            <p class="comment-content">{{ comment.content }}</p>
+                                <p class="comment-meta">Posté le {{ comment.createdAt | date('d/m/Y H:i:s') }} </p>
+                        </div>
+                        <div>
+                            <a href="{{ path('app_delete_comment', {'id': comment.id}) }}"
+                               class="delete-comment-button btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+    </div>
+
+</div>
+
+<div class="comment-form-container">
+    {{ form_start(form) }}
+    <div class="mb-3">
+        <div class="editor-toolbar">
+            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>
+        </div>
+
+        {{ form_widget(form.content, {
+            'attr': {
+                'class': 'form-control',
+                'rows': 10,
+                'style': 'border-radius: 0; height: 200px; width: 100%; text-align: left; vertical-align: top; overflow-y: auto;',
+            }
+        }) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Publier</button>
+    {{ form_end(form) }}
+</div>
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+</body>
+{% else %}
+    <div class="message">
+        Vous n'avez pas accès à cette page du site veuillez vous connecter
+    </div>
+{% endif %}
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cet article ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <a href="{{ path('app_deleteResource', {'id': resource.id}) }}" class="btn btn-danger">Supprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,279 @@
-h1 {
-    font-size: 30px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.navbar-brand-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0055a4;
+    margin-left: 10px;
+}
+
+.accessibility-button {
+    margin-right: 20px;
+}
+
+.accessibility-button span {
+    margin-left: 10px;
+    color: #0055a4;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .show > .nav-link {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-color: transparent;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    position: fixed;
+    bottom: -100px;
+    width: 100%;
+    transition: bottom 0.3s ease;
+}
+
+.article-container {
+    margin: 50px auto;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.article-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.article-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    text-align: justify;
+}
+
+.article-meta {
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.comment-container {
+    margin-top: 30px;
+}
+
+.comment {
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-content {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.comment-meta {
+    font-size: 14px;
+    color: #999;
+}
+
+.comment-form-container {
+    margin: 50px auto;
+    width: 70%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.editor-toolbar {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Login Form Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 360px;
+}
+
+.form-row {
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #004494;
+}
+
+/* Registration Form Styles */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.register-form {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-footer {
+    margin-top: 20px;
     text-align: center;
+}
+
+.form-footer a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.form-footer a:hover {
+    color: #0056b3;
+}
+
+/* Article Styles */
+.article {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    width: 1000px;
+    margin-left: auto;
+    color: black;
+    margin-right: auto;
+}
+
+.article .entete h2 {
+    margin: 0;
+    color: #0056b3;
+}
+
+.article-content {
+    margin-top: 10px;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+/* Snackbar */
+.snackbar {
+    visibility: visible;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+/* Accessibility Styles */
+.blue-background {
+    background-color: blue !important;
+    border: 1px solid yellow;
+}
+
+.yellow-text {
+    color: yellow !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .article {
+        width: 90%;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .article {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .article-content {
+        width: auto;
+    }
+}
+.action-buttons .btn {
+    width: 30px;
+    height: 30px;
 }

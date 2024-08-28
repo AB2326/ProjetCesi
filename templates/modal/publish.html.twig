@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}(RE)SOURCES RELATIONNELLES!{% endblock %}</title>
+ </head>
+<body>
+<div class="container-fluid" style="display: flex; flex-direction: column; align-items: center; margin-top: 50px;">
+    {{ form_start(form) }}
+    <div class="mb-3" style="width: 800px;">
+        {{ form_label(form.title, 'Titre de l\'article', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.title, {
+            'attr': {
+                'class': 'form-control',
+                'style': 'text-align: left;',
+            }
+        }) }}
+    </div>
+    <div class="mb-3" style="width: 800px;">
+        {{ form_label(form.content, 'Contenu de l\'article', {'label_attr': {'class': 'form-label'}}) }}
+
+        <div class="editor-toolbar" style="border: 1px solid #ccc; border-bottom: 0; padding: 5px; background: #f9f9f9;">
+            <i class="fa fa-bold" title="Bold" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-italic" title="Italic" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ul" title="Bullet List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-list-ol" title="Numbered List" style="margin-right: 10px; cursor: pointer;"></i>
+            <i class="fa fa-underline" title="Underline" style="margin-right: 10px; cursor: pointer;"></i>
+        </div>
+
+        {{ form_widget(form.content, {
+            'attr': {
+                'class': 'form-control',
+                'rows': 10,
+                'style': 'border-radius: 0; height: 200px; text-align: left; overflow-y: auto;',
+            }
+        }) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Publier</button>
+    {{ form_end(form) }}
+</div>
+
+{% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+{% endblock %}
+</body>
+{% endblock %}

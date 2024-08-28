@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -18,9 +20,45 @@ class Comment
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
+    #[ORM\Column(type: "datetime")]
+    private ?DateTimeInterface $createdAt = null;
 
-    #[ORM\Column]
-    private ?bool $isDeleted = null;
+    #[ORM\Column(type: "datetime")]
+    private ?DateTimeInterface $deletedAt = null;
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getDeletedAt(): ?DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    /**
+     * @param DateTimeInterface|null $deletedAt
+     */
+    public function setDeletedAt(?DateTimeInterface $deletedAt): void
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    #[ORM\Column(name: "id_ressource", type: "integer")]
+    private ?int $resourceId = null;
+
+    #[ORM\Column(name: "id_user", type: 'integer', nullable: true)]
+    private ?int $idUser = null; 
+
+    public function getIdUser(): ?int
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?int $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -58,14 +96,24 @@ class Comment
         return $this;
     }
 
-    public function isIsDeleted(): ?bool
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->isDeleted;
+        return $this->createdAt;
     }
 
-    public function setIsDeleted(bool $isDeleted): static
+    public function setCreatedAt(?DateTimeInterface $createdAt): void
     {
-        $this->isDeleted = $isDeleted;
+        $this->createdAt = $createdAt;
+    }
+
+    public function getResourceId(): ?int
+    {
+        return $this->resourceId;
+    }
+
+    public function setResourceId(?int $resourceId): self
+    {
+        $this->resourceId = $resourceId;
 
         return $this;
     }

@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Connexion{% endblock %}
+
 
 {% block body %}
-    <h1>Connexion</h1>
-    <form action="/connexion" method="POST">
-        <label for="username">Nom d'utilisateur:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Mot de passe:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Se connecter">
-        <p><a href="/mot-de-passe-oublie">Mot de passe oublié ?</a></p>
-        <p><a href="/inscription">S'inscrire</a></p>
-        <p><a href="/deja-inscrit">Déjà inscrit ?</a></p>
-    </form>
+    <main class="login-container">
+        <div class="login-form">
+            <h1>Connexion</h1>
+            {{ form_start(form) }}
+            <div class="form-row">
+                {{ form_row(form.email, { 'label': 'Adresse email' }) }}
+            </div>
+            <div class="form-row">
+                {{ form_row(form.firstPassword, { 'label': 'Mot de passe' }) }}
+            </div>
+            <div class="form-row">
+                <button type="submit" class="submit-btn">Connexion</button>
+            </div>
+            {{ form_end(form) }}
 
-
+            {{error}}
+        </div>
+    </main>
 {% endblock %}
 

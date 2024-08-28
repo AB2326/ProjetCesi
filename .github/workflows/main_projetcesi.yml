@@ -43,7 +43,7 @@ jobs:
     needs: build
     if: github.event_name == 'push'
     environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write
@@ -63,12 +63,11 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_78172B8A6A8F47DFB80E1C76B81C3AAA }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6FF3FECF94334704BF33041DE31866A8 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3EFBBC77CACA471E90FAEA56EB3A38D7 }}
-          client-secret: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }} # Make sure to add this secret if needed
+          client-secret: ${{ secrets.AZUREAPPSERVICE_CLIENTSECRET }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: ${{ github.ref == 'refs/heads/main' && 'ProjetCesi' || 'ProjetCesi-dev' }}
-          slot-name: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
-          package: ./
+          package: .

@@ -1,24 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Info Gouv!{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,
-        <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22>
-            <text y=%221.2em%22 font-size=%2296%22>⚫️
-             </text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf
-            </text>
-        </svg>">
-    {% block stylesheets %}
-    {% endblock %}
+{% extends 'base.html.twig' %}
 
-    {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
-    {% endblock %}
-</head>
-<body>
 {% block body %}
-    <h1> Titre de la page</h1>
+    <div class="container">
+        {% if app.user %}
+            <div class="menu" style="margin: 30px 0 30px 120px;">
+                <a href="{{ path('create_resource') }}" class="btn btn-success">Publier</a>
+                <button class="btn btn-primary"><i class="fas fa-image"></i></button>
+                <button class="btn btn-primary"><i class="fas fa-link"></i></button>
+            </div>
+        {% else %}
+            <div class="disabled" style="margin-top: 80px"></div>
+        {% endif %}
+        {% for resource in resources %}
+            {% if resource.deletedAt == null %}
+                <div class="row" style="margin-left: 150px">
+                    <div class="col-md-6">
+                        <div class="article">
+                            <div class="entete d-flex justify-content-between">
+                                <h2>{{ resource.title }}</h2>
+                            </div>
+                            <div class="article-content">
+                                {% set words = resource.content | split(' ') %}
+                                {{ words | slice(0, 100) | join(' ') }}{% if words|length > 100 %} ...{% endif %}
+                            </div>
+                            {% if app.user %}
+                                <div class="buttons d-flex justify-content-end">
+                                    <button class="like-button btn btn-primary"><i class="fas fa-thumbs-up"></i>
+                                    </button>
+                                    <button class="dislike-button btn btn-danger"><i class="fas fa-thumbs-down"></i>
+                                    </button>
+                                    <button class="favorite-button btn btn-warning"><i class="fas fa-star"></i></button>
+                                </div>
+                            {% endif %}
+                            <div class="consulter"
+                                 style="display: flex; justify-content: space-between; align-items: center;">
+                                <a href="{{ path('resource_page', {'id': resource.id}) }}"
+                                   class="view-more-button btn btn-success">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
-</body>
-</html>

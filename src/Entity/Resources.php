@@ -89,14 +89,35 @@ class Resources
     #[ORM\Column]
     private ?bool $isRestricted = null;
 
+//    /**
+//     * @var User|null
+//     */
+//    #[ORM\ManyToOne(targetEntity: User::class)]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private ?User $createdBy = null;
+
+    // /**
+    //  * @return User|null
+    //  */
+    // public function getCreatedBy(): ?User
+    // {
+    //     return $this->createdBy;
+    // }
+
+    // /**
+    //  * @param User|null $createdBy
+    //  */
+    // public function setCreatedBy(?User $createdBy): void
+    // {
+    //     $this->createdBy = $createdBy;
+    // }
+
     /**
      *
      */
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        $this->updatedAt = new DateTime();
-        $this->deletedAt = new DateTime();
     }
 
     /* Getters Setters */
