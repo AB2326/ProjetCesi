@@ -1,0 +1,50 @@
+<header>
+    <div id="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/a/a8/Minist%C3%A8re_des_Solidarit%C3%A9s_et_de_la_Sant%C3%A9_%28logo%2C_2017%29.svg/2089px-Minist%C3%A8re_des_Solidarit%C3%A9s_et_de_la_Sant%C3%A9_%28logo%2C_2017%29.svg.png" />
+    </div>
+    <div id="search-bar">
+        <input type="search" placeholder="Recherche">
+    </div>
+    <div id="user-links">
+        <a href="login">Connexion / Inscription</a>
+    </div>
+</header>
+
+<div id="container">
+  <div class="main">
+      <div class="menu">
+          <aside id="categories">
+              <nav>
+                  <h2>Catégories</h2>
+                  <ul>
+                    <li *ngFor="let category of categories">{{ category.name }}</li>
+                  </ul>
+              </nav>
+          </aside>
+      </div>
+      <div class="contenu">
+          <article>
+              <h2>Articles 1</h2>
+              <p>Ceci est un article</p>
+          </article>
+          <article>
+              <h2>Articles 2</h2>
+              <!-- Contenu de l'article 2 -->
+          </article>
+      </div>
+      <div class="reco">
+          <aside id="recommendations">
+              <h3>Recommandations</h3>
+              <ul>
+                <li >
+                  1
+                </li>
+              </ul>
+          </aside>
+      </div>
+  </div>
+</div>
+<div class="footer">
+    <div id="settings">Réglages</div>
+    <div id="legal">Mentions Légales</div>
+</div>
